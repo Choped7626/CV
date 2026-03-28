@@ -8,7 +8,7 @@
   --accent:    #7c6af7;
   --accent2:   #e05f8a;
   --mono:      'DM Mono', monospace;
-  --sans:      'Syne', sans-serif;
+  --sans:      'Syne', monospace;
 
   --a4-w: 794px;
   --a4-h: 1123px;
@@ -123,19 +123,12 @@ body {
 .sidebar-name { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
 
 .sidebar-name h1 {
+  font-family: 'Share Tech Mono', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
   margin-bottom: 0.4rem;
-}
-
-.sidebar-name h1 em {
-  font-style: normal;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .sidebar-picture {
@@ -401,35 +394,100 @@ body {
 
 .cv-footer a:hover { color: var(--accent); }
 
-@media print {
-  @page {
-    margin: 0;
-    size: A4;
+@media (max-width: 900px) {
+  :root {
+    --a4-w: 100%;
+    --a4-h: auto;
   }
+
+  body { padding: 0; }
+
+  .export-bar {
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .page {
+    width: 100%;
+    height: auto;
+    grid-template-columns: 1fr;
+    box-shadow: none;
+  }
+
+  .page::before { display: none; }
+
+  .sidebar {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .sidebar-picture img {
+    width: 90px;
+    height: 90px;
+    min-width: 90px;
+    min-height: 90px;
+    max-width: 90px;
+    max-height: 90px;
+  }
+
+  .content {
+    padding: 2rem 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .cv-footer {
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar { padding: 1.5rem 1rem; }
+  .content { padding: 1.5rem 1rem; }
+
+  .export-bar { padding: 0.75rem 1rem; }
+
+  .export-btn, .btn-theme {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media print {
+  @page { margin: 0; size: A4; }
   body { background: none; padding: 0; }
   .export-bar { display: none; }
-  .page { width: 210mm; height: 297mm; box-shadow: none; }
-
-  .skill-bar {
-    background: #ddd !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  .skill-fill {
-    background: #000 !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  .print-info { display: block; }
-
-  .print-qr {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
   .cv-footer { display: none; }
+
+  :root {
+    --a4-w: 210mm;
+    --a4-h: 297mm;
+  }
+
+  .page {
+    width: 210mm !important;
+    height: 297mm !important;
+    display: grid !important;
+    grid-template-columns: 260px 1fr !important;
+    box-shadow: none;
+  }
+
+  .page::before { display: block !important; }
+
+  .sidebar {
+    padding: 2.5rem 1.8rem !important;
+  }
+
+  .content {
+    padding: 2.5rem 2.2rem !important;
+  }
+
+  .skill-bar { background: #ddd !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .skill-fill { background: #000 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .print-info { display: block !important; }
+  .print-qr { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 
 body.light {
